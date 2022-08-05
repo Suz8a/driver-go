@@ -19,6 +19,8 @@ export type CarConfig = {
   commands: Commands;
 };
 
+export type ConfigID = "gpsNumber" | "start" | "stop" | "alarmOn" | "alarmOff";
+
 export default function useCarConfig() {
   const [storedCarConfig, setStoredCarConfig] = useAsyncStorage(
     "carConfig",
@@ -46,5 +48,35 @@ export default function useCarConfig() {
     },
   });
 
-  return null;
+  const changeCarConfig = useCallback((configId: ConfigID, value: string) => {
+    if (configId === "gpsNumber") {
+      setStoredCarConfig &&
+        setStoredCarConfig(
+          JSON.stringify({
+            ...carConfig,
+            gpsNumber: value,
+          })
+        );
+    } else {
+      setStoredCarConfig &&
+        setStoredCarConfig(
+          JSON.stringify({
+            ...carConfig,
+            commands: {
+              ...carConfig.commands,
+              [configId]: value,
+            },
+          })
+        );
+    }
+  }, []);
+
+  useEffect(() => {
+    if (storedCarConfig) setCarConfig(JSON.parse(storedCarConfig as any));
+  }, [storedCarConfig]);
+
+  return {
+    carConfig,
+    changeCarConfig,
+  };
 }
