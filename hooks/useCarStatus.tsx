@@ -4,7 +4,11 @@ import Icon from "react-native-vector-icons/Fontisto";
 
 export type CommandStatus = {
   active: boolean;
-  icon: ReactNode;
+  iconProps: {
+    name: string;
+    size: number;
+    color: string;
+  };
 };
 
 export type CarStatus = {
@@ -20,11 +24,19 @@ export default function useCarStatus() {
   const [carStatus, setCarStatus] = useState<CarStatus>({
     engine: {
       active: true,
-      icon: <Icon name="power" size={70} color="green" />,
+      iconProps: {
+        name: "power",
+        size: 70,
+        color: "green",
+      },
     },
     alarm: {
       active: true,
-      icon: <Icon name="unlocked" size={70} color="green" />,
+      iconProps: {
+        name: "unlocked",
+        size: 70,
+        color: "green",
+      },
     },
   });
 
@@ -37,13 +49,11 @@ export default function useCarStatus() {
           ...carStatus,
           engine: {
             active: engineSwitchedIsActive,
-            icon: (
-              <Icon
-                name="power"
-                size={70}
-                color={engineSwitchedIsActive ? "green" : "red"}
-              />
-            ),
+            iconProps: {
+              name: "power",
+              size: 70,
+              color: engineSwitchedIsActive ? "green" : "red",
+            },
           },
         })
       );
@@ -58,13 +68,11 @@ export default function useCarStatus() {
           ...carStatus,
           alarm: {
             active: alarmSwitchedIsActive,
-            icon: (
-              <Icon
-                name={alarmSwitchedIsActive ? "unlocked" : "locked"}
-                size={70}
-                color={alarmSwitchedIsActive ? "green" : "red"}
-              />
-            ),
+            iconProps: {
+              name: alarmSwitchedIsActive ? "unlocked" : "locked",
+              size: 70,
+              color: alarmSwitchedIsActive ? "green" : "red",
+            },
           },
         })
       );
