@@ -6922,11 +6922,6 @@ react-native-screens@~3.11.1:
     react-freeze "^1.0.0"
     warn-once "^0.1.0"
 
-react-native-sms-x@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/react-native-sms-x/-/react-native-sms-x-1.0.7.tgz#44215a7d053281fa1cf865ae53178dd20ada61f4"
-  integrity sha512-X0HK5aXga/ok32D5hBeSv6oTBcyOntBwdjoFDFJnYoZ0y5NQacNI/goZuc6a2ohQnqhqcOkV5bjTPIAn/VNsBA==
-
 react-native-vector-icons@^9.2.0:
   version "9.2.0"
   resolved "https://registry.yarnpkg.com/react-native-vector-icons/-/react-native-vector-icons-9.2.0.tgz#3c0c82e95defd274d56363cbe8fead8d53167ebd"

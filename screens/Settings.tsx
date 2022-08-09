@@ -6,6 +6,7 @@ export default function Settings() {
     <View style={styles.container}>
       <Text style={styles.title}>Tab Two</Text>
       <View style={styles.separator} />
+      <Text style={styles.title}>Tab Two</Text>
     </View>
   );
 }
@@ -15,10 +16,12 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "white",
   },
   title: {
     fontSize: 20,
     fontWeight: "bold",
+    color: "black",
   },
   separator: {
     marginVertical: 30,
