@@ -2,17 +2,17 @@ import React, { ReactNode } from "react";
 import { View, StyleSheet, TouchableOpacity } from "react-native";
 
 export type RoundedButtonProps = {
-  callback: () => void;
+  onPress: () => void;
   children: ReactNode;
 };
 
 export default function RoundedButton({
-  callback,
+  onPress,
   children,
 }: RoundedButtonProps) {
   return (
     <View>
-      <TouchableOpacity style={styles.button} onPress={() => callback()}>
+      <TouchableOpacity style={styles.button} onPress={onPress}>
         {children}
       </TouchableOpacity>
     </View>
