@@ -11,11 +11,9 @@ export default function RoundedButton({
   children,
 }: RoundedButtonProps) {
   return (
-    <View>
-      <TouchableOpacity style={styles.button} onPress={onPress}>
-        {children}
-      </TouchableOpacity>
-    </View>
+    <TouchableOpacity style={styles.button} onPress={onPress}>
+      {children}
+    </TouchableOpacity>
   );
 }
 

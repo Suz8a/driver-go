@@ -1,5 +1,4 @@
-import { StyleSheet } from "react-native";
-import { View } from "../components/Themed";
+import { StyleSheet, View } from "react-native";
 import RoundedButton from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
 import useCarStatus from "../hooks/useCarStatus";
@@ -16,14 +15,12 @@ export default function Home() {
 
   return (
     <View style={styles.container}>
-      <View>
-        <RoundedButton onPress={switchEngine}>
-          <Icon {...engineIconProps} />
-        </RoundedButton>
-        <RoundedButton onPress={switchAlarm}>
-          <Icon {...alarmIconProps} />
-        </RoundedButton>
-      </View>
+      <RoundedButton onPress={switchEngine}>
+        <Icon {...engineIconProps} />
+      </RoundedButton>
+      <RoundedButton onPress={switchAlarm}>
+        <Icon {...alarmIconProps} />
+      </RoundedButton>
     </View>
   );
 }
@@ -33,6 +30,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#f3f3f5",
   },
   title: {
     fontSize: 20,
