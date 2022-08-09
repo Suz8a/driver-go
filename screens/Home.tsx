@@ -1,18 +1,27 @@
 import { StyleSheet } from "react-native";
-
 import { View } from "../components/Themed";
 import RoundedButton from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
+import useCarStatus from "../hooks/useCarStatus";
 
 export default function Home() {
+  const {
+    carStatus: {
+      alarm: { iconProps: alarmIconProps },
+      engine: { iconProps: engineIconProps },
+    },
+    switchAlarm,
+    switchEngine,
+  } = useCarStatus();
+
   return (
     <View style={styles.container}>
       <View>
-        <RoundedButton callback={() => {}}>
-          <Icon name="power" size={70} color="black" />
+        <RoundedButton onPress={switchEngine}>
+          <Icon {...engineIconProps} />
         </RoundedButton>
-        <RoundedButton callback={() => {}}>
-          <Icon name="locked" size={70} color="black" />
+        <RoundedButton onPress={switchAlarm}>
+          <Icon {...alarmIconProps} />
         </RoundedButton>
       </View>
     </View>
