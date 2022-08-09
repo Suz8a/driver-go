@@ -48,31 +48,33 @@ export default function useCarConfig() {
     },
   });
 
-  const changeCarConfig = useCallback((configId: ConfigID, value: string) => {
-    if (configId === "gpsNumber") {
-      setStoredCarConfig &&
-        setStoredCarConfig(
-          JSON.stringify({
-            ...carConfig,
-            gpsNumber: value,
-          })
-        );
-    } else {
-      setStoredCarConfig &&
-        setStoredCarConfig(
-          JSON.stringify({
-            ...carConfig,
-            commands: {
-              ...carConfig.commands,
-              [configId]: value,
-            },
-          })
-        );
-    }
-  }, []);
+  const changeCarConfig = useCallback(
+    (configId: ConfigID, value: string) => {
+      const newCarConfig =
+        configId === "gpsNumber"
+          ? {
+              ...carConfig,
+              gpsNumber: value,
+            }
+          : {
+              ...carConfig,
+              commands: {
+                ...carConfig.commands,
+                [configId]: value,
+              },
+            };
+
+      if (configId === "gpsNumber") {
+        setStoredCarConfig(newCarConfig);
+      } else {
+        setStoredCarConfig(newCarConfig);
+      }
+    },
+    [setStoredCarConfig]
+  );
 
   useEffect(() => {
-    if (storedCarConfig) setCarConfig(JSON.parse(storedCarConfig as any));
+    if (storedCarConfig) setCarConfig(storedCarConfig);
   }, [storedCarConfig]);
 
   return {
