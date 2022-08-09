@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import useAsyncStorage from "./useAsyncStorage";
-import * as _ from "lodash";
 
 export type CommandStatus = {
   active: boolean;
