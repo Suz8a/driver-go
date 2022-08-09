@@ -1,6 +1,6 @@
-import { ReactNode, useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 import useAsyncStorage from "./useAsyncStorage";
-import Icon from "react-native-vector-icons/Fontisto";
+import * as _ from "lodash";
 
 export type CommandStatus = {
   active: boolean;
@@ -42,44 +42,42 @@ export default function useCarStatus() {
 
   const switchEngine = useCallback(() => {
     const engineSwitchedIsActive = !carStatus.engine.active;
+    const newStatusData = {
+      ...carStatus,
+      engine: {
+        active: engineSwitchedIsActive,
+        iconProps: {
+          name: "power",
+          size: 70,
+          color: engineSwitchedIsActive ? "green" : "red",
+        },
+      },
+    };
 
-    setStoredCarStatus &&
-      setStoredCarStatus(
-        JSON.stringify({
-          ...carStatus,
-          engine: {
-            active: engineSwitchedIsActive,
-            iconProps: {
-              name: "power",
-              size: 70,
-              color: engineSwitchedIsActive ? "green" : "red",
-            },
-          },
-        })
-      );
-  }, []);
+    setStoredCarStatus(newStatusData);
+  }, [setStoredCarStatus, carStatus]);
 
   const switchAlarm = useCallback(() => {
     const alarmSwitchedIsActive = !carStatus.alarm.active;
+    const newStatusData = {
+      ...carStatus,
+      alarm: {
+        active: alarmSwitchedIsActive,
+        iconProps: {
+          name: alarmSwitchedIsActive ? "unlocked" : "locked",
+          size: 70,
+          color: alarmSwitchedIsActive ? "green" : "red",
+        },
+      },
+    };
 
-    setStoredCarStatus &&
-      setStoredCarStatus(
-        JSON.stringify({
-          ...carStatus,
-          alarm: {
-            active: alarmSwitchedIsActive,
-            iconProps: {
-              name: alarmSwitchedIsActive ? "unlocked" : "locked",
-              size: 70,
-              color: alarmSwitchedIsActive ? "green" : "red",
-            },
-          },
-        })
-      );
-  }, []);
+    setStoredCarStatus(newStatusData);
+  }, [setStoredCarStatus, carStatus]);
 
   useEffect(() => {
-    if (storedCarStatus) setCarStatus(JSON.parse(storedCarStatus as any));
+    if (storedCarStatus) {
+      setCarStatus(storedCarStatus);
+    }
   }, [storedCarStatus]);
 
   return {
