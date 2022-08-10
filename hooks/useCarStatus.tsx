@@ -1,13 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 import useAsyncStorage from "./useAsyncStorage";
+import { IconProps } from "../constants/Settings";
 
 export type CommandStatus = {
   active: boolean;
-  iconProps: {
-    name: string;
-    size: number;
-    color: string;
-  };
+  iconProps: IconProps;
 };
 
 export type CarStatus = {
