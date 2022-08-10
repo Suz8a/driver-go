@@ -1,9 +1,3 @@
-/**
- * If you are not familiar with React Navigation, refer to the "Fundamentals" guide:
- * https://reactnavigation.org/docs/getting-started
- *
- */
-import { FontAwesome } from "@expo/vector-icons";
 import {
   NavigationContainer,
   DefaultTheme,
@@ -13,20 +7,19 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable, View } from "react-native";
 
-import useColorScheme from "../hooks/useColorScheme";
-import ModalScreen from "../screens/ModalScreen";
 import NotFoundScreen from "../screens/NotFoundScreen";
 import Home from "../screens/Home";
 import Settings from "../screens/Settings";
 import {
   RootStackParamList,
-  RootTabParamList,
-  RootTabScreenProps,
+  RootStackScreenProps,
+  SettingsTabParamList,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const settingsIcon = <Icon name="ios-settings" size={30} color="gray" />;
+const settingsIcon = <Icon name="settings-sharp" size={30} color="gray" />;
+const arrowLeftIcon = <Icon name="ios-arrow-back" size={30} color="gray" />;
 
 export default function Navigation({
   colorScheme,
@@ -53,39 +46,13 @@ function RootNavigator() {
   return (
     <Stack.Navigator>
       <Stack.Screen
-        name="Root"
-        component={BottomTabNavigator}
-        options={{ headerShown: false }}
-      />
-      <Stack.Screen
-        name="NotFound"
-        component={NotFoundScreen}
-        options={{ title: "Oops!" }}
-      />
-      <Stack.Group screenOptions={{ presentation: "modal" }}>
-        <Stack.Screen name="Modal" component={ModalScreen} />
-      </Stack.Group>
-    </Stack.Navigator>
-  );
-}
-
-/**
- * A bottom tab navigator displays tab buttons on the bottom of the display to switch screens.
- * https://reactnavigation.org/docs/bottom-tab-navigator
- */
-const RootStack = createNativeStackNavigator<RootTabParamList>();
-
-function BottomTabNavigator() {
-  return (
-    <RootStack.Navigator initialRouteName="Home">
-      <RootStack.Screen
         name="Home"
         component={Home}
-        options={({ navigation }: RootTabScreenProps<"Home">) => ({
+        options={({ navigation }: RootStackScreenProps<"Home">) => ({
           title: "Home",
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("Settings")}
+              onPress={() => navigation.navigate("SettingsTabNavigator")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -95,7 +62,49 @@ function BottomTabNavigator() {
           ),
         })}
       />
-      <RootStack.Screen name="Settings" component={Settings} />
-    </RootStack.Navigator>
+      <Stack.Screen
+        name="SettingsTabNavigator"
+        component={SettingsTabNavigator}
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="NotFound"
+        component={NotFoundScreen}
+        options={{ title: "Oops!" }}
+      />
+    </Stack.Navigator>
+  );
+}
+
+const SettingsTab = createNativeStackNavigator<SettingsTabParamList>();
+
+function SettingsTabNavigator() {
+  return (
+    <SettingsTab.Navigator initialRouteName="Settings">
+      <SettingsTab.Screen
+        name="Settings"
+        component={Settings}
+        options={() => ({
+          headerStyle: { backgroundColor: "#f6f6f6" },
+          headerTitleStyle: {
+            color: "black",
+          },
+
+          headerLeft: () => (
+            <Pressable
+              onPress={() => {}}
+              style={({ pressed }) => ({
+                opacity: pressed ? 0.5 : 1,
+              })}
+            >
+              <View style={{ marginLeft: 10 }}>{arrowLeftIcon}</View>
+            </Pressable>
+          ),
+        })}
+      />
+      <SettingsTab.Screen name="Name" component={Home} />
+      <SettingsTab.Screen name="GPSNumber" component={Home} />
+      <SettingsTab.Screen name="Commands" component={Home} />
+    </SettingsTab.Navigator>
   );
 }

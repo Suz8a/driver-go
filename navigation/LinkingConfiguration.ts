@@ -10,24 +10,18 @@ import * as Linking from "expo-linking";
 import { RootStackParamList } from "../types";
 
 const linking: LinkingOptions<RootStackParamList> = {
-  prefixes: [Linking.makeUrl("/")],
+  prefixes: [Linking.createURL("/")],
   config: {
     screens: {
-      Root: {
+      Home: "home",
+      SettingsTabNavigator: {
         screens: {
-          Home: {
-            screens: {
-              HomeScreen: "home",
-            },
-          },
-          Settings: {
-            screens: {
-              SettingsScreen: "settings",
-            },
-          },
+          Settings: "settings",
+          Name: "name",
+          GPSNumber: "gpsNumber",
+          Commands: "commands",
         },
       },
-      Modal: "modal",
       NotFound: "*",
     },
   },
