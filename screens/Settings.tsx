@@ -1,31 +1,75 @@
-import { StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  ScrollView,
+  StyleSheet,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import { Text } from "../components/Themed";
+import { settings } from "../constants/Settings";
+import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+
+const windowWidth = Dimensions.get("window").width;
 
 export default function Settings() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab Two</Text>
-      <View style={styles.separator} />
-      <Text style={styles.title}>Tab Two</Text>
-    </View>
+    <ScrollView style={styles.container}>
+      <View>
+        <View style={styles.sectionTitleContainer}>
+          <Text style={styles.sectionTitle}>Profile info</Text>
+        </View>
+        <View style={styles.section}>
+          {settings.map(({ iconProps, route, title }, index) => (
+            <TouchableOpacity key={index}>
+              <View style={styles.settingOptionContainer}>
+                <Icon {...iconProps} />
+                <Text style={styles.title}>{title}</Text>
+              </View>
+              {index !== settings.length - 1 && (
+                <View style={styles.separator} />
+              )}
+            </TouchableOpacity>
+          ))}
+        </View>
+      </View>
+    </ScrollView>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    backgroundColor: "#f6f6f6",
+    paddingTop: 20,
+  },
+  sectionTitleContainer: {
+    marginLeft: 10,
+  },
+  sectionTitle: {
+    color: "#8C8D8B",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  section: {
     backgroundColor: "white",
+    marginVertical: 10,
+    borderRadius: 20,
+  },
+  settingOptionContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+    marginHorizontal: 10,
   },
   title: {
     fontSize: 20,
-    fontWeight: "bold",
-    color: "black",
+    color: "#343539",
+    marginLeft: 10,
   },
   separator: {
-    marginVertical: 30,
     height: 1,
-    width: "80%",
+    width: windowWidth - 40,
+    backgroundColor: "#DEDEE4",
+    marginLeft: 40,
   },
 });
