@@ -1,12 +1,7 @@
-/**
- * Learn more about using TypeScript with React Navigation:
- * https://reactnavigation.org/docs/typescript/
- */
-
-import { BottomTabScreenProps } from "@react-navigation/bottom-tabs";
 import {
   CompositeScreenProps,
   NavigatorScreenParams,
+  CompositeNavigationProp,
 } from "@react-navigation/native";
 import { NativeStackScreenProps } from "@react-navigation/native-stack";
 
@@ -16,24 +11,31 @@ declare global {
   }
 }
 
+// Param Lists
+
 export type RootStackParamList = {
-  SettingsTabNavigator: NavigatorScreenParams<SettingsTabParamList> | undefined;
+  SettingsStackNavigator:
+    | NavigatorScreenParams<SettingsStackParamList>
+    | undefined;
   Home: undefined;
   NotFound: undefined;
 };
 
-export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
-  NativeStackScreenProps<RootStackParamList, Screen>;
-
-export type SettingsTabParamList = {
+export type SettingsStackParamList = {
   Settings: undefined;
   Name: undefined;
   GPSNumber: undefined;
   Commands: undefined;
 };
 
-export type SettingsTabScreenProps<Screen extends keyof SettingsTabParamList> =
-  CompositeScreenProps<
-    BottomTabScreenProps<SettingsTabParamList, Screen>,
-    NativeStackScreenProps<RootStackParamList>
-  >;
+// Screen Props
+
+export type RootStackScreenProps<TScreen extends keyof RootStackParamList> =
+  NativeStackScreenProps<RootStackParamList, TScreen>;
+
+export type SettingsStackScreenProps<
+  TScreen extends keyof SettingsStackParamList
+> = CompositeScreenProps<
+  NativeStackScreenProps<SettingsStackParamList, TScreen>,
+  RootStackScreenProps<"Home">
+>;

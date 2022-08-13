@@ -13,13 +13,14 @@ import Settings from "../screens/Settings";
 import {
   RootStackParamList,
   RootStackScreenProps,
-  SettingsTabParamList,
+  SettingsStackParamList,
+  SettingsStackScreenProps,
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const settingsIcon = <Icon name="settings-sharp" size={30} color="gray" />;
-const arrowLeftIcon = <Icon name="ios-arrow-back" size={25} color="black" />;
+const arrowLeftIcon = <Icon name="ios-arrow-back" size={25} color="white" />;
 
 export default function Navigation({
   colorScheme,
@@ -36,19 +37,19 @@ export default function Navigation({
   );
 }
 
-const Stack = createNativeStackNavigator<RootStackParamList>();
+const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <Stack.Navigator>
-      <Stack.Screen
+    <RootStack.Navigator>
+      <RootStack.Screen
         name="Home"
         component={Home}
         options={({ navigation }: RootStackScreenProps<"Home">) => ({
           title: "Home",
           headerRight: () => (
             <Pressable
-              onPress={() => navigation.navigate("SettingsTabNavigator")}
+              onPress={() => navigation.push("SettingsStackNavigator")}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
@@ -58,48 +59,46 @@ function RootNavigator() {
           ),
         })}
       />
-      <Stack.Screen
-        name="SettingsTabNavigator"
-        component={SettingsTabNavigator}
+      <RootStack.Screen
+        name="SettingsStackNavigator"
+        component={SettingsStackNavigator}
         options={{ headerShown: false }}
       />
-      <Stack.Screen
+      <RootStack.Screen
         name="NotFound"
         component={NotFoundScreen}
         options={{ title: "Oops!" }}
       />
-    </Stack.Navigator>
+    </RootStack.Navigator>
   );
 }
 
-const SettingsTab = createNativeStackNavigator<SettingsTabParamList>();
+const SettingsStack = createNativeStackNavigator<SettingsStackParamList>();
 
-function SettingsTabNavigator() {
+function SettingsStackNavigator() {
   return (
-    <SettingsTab.Navigator initialRouteName="Settings">
-      <SettingsTab.Screen
+    <SettingsStack.Navigator initialRouteName="Settings">
+      <SettingsStack.Screen
         name="Settings"
         component={Settings}
-        options={() => ({
-          headerTransparent: true,
-          headerTitleStyle: {
-            color: "black",
-          },
+        options={({ navigation }: SettingsStackScreenProps<"Settings">) => ({
           headerLeft: () => (
             <Pressable
-              onPress={() => {}}
+              onPress={() => {
+                navigation.navigate("Home");
+              }}
               style={({ pressed }) => ({
                 opacity: pressed ? 0.5 : 1,
               })}
             >
-              <View style={{ marginLeft: 9 }}>{arrowLeftIcon}</View>
+              <View style={{ marginRight: 10 }}>{arrowLeftIcon}</View>
             </Pressable>
           ),
         })}
       />
-      <SettingsTab.Screen name="Name" component={Home} />
-      <SettingsTab.Screen name="GPSNumber" component={Home} />
-      <SettingsTab.Screen name="Commands" component={Home} />
-    </SettingsTab.Navigator>
+      <SettingsStack.Screen name="Name" component={Home} />
+      <SettingsStack.Screen name="GPSNumber" component={Home} />
+      <SettingsStack.Screen name="Commands" component={Home} />
+    </SettingsStack.Navigator>
   );
 }

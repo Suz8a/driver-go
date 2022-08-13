@@ -14,7 +14,7 @@ const linking: LinkingOptions<RootStackParamList> = {
   config: {
     screens: {
       Home: "home",
-      SettingsTabNavigator: {
+      SettingsStackNavigator: {
         screens: {
           Settings: "settings",
           Name: "name",
