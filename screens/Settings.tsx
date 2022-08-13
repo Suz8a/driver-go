@@ -39,7 +39,7 @@ export default function Settings() {
 const styles = StyleSheet.create({
   container: {
     backgroundColor: "#f6f6f6",
-    paddingTop: 20,
+    paddingTop: 80,
   },
   sectionTitleContainer: {
     marginLeft: 10,

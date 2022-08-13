@@ -19,7 +19,7 @@ import LinkingConfiguration from "./LinkingConfiguration";
 import Icon from "react-native-vector-icons/Ionicons";
 
 const settingsIcon = <Icon name="settings-sharp" size={30} color="gray" />;
-const arrowLeftIcon = <Icon name="ios-arrow-back" size={30} color="gray" />;
+const arrowLeftIcon = <Icon name="ios-arrow-back" size={25} color="black" />;
 
 export default function Navigation({
   colorScheme,
@@ -81,11 +81,10 @@ function SettingsTabNavigator() {
         name="Settings"
         component={Settings}
         options={() => ({
-          headerStyle: { backgroundColor: "#f6f6f6" },
+          headerTransparent: true,
           headerTitleStyle: {
             color: "black",
           },
-
           headerLeft: () => (
             <Pressable
               onPress={() => {}}
@@ -93,7 +92,7 @@ function SettingsTabNavigator() {
                 opacity: pressed ? 0.5 : 1,
               })}
             >
-              <View style={{ marginLeft: 10 }}>{arrowLeftIcon}</View>
+              <View style={{ marginLeft: 9 }}>{arrowLeftIcon}</View>
             </Pressable>
           ),
         })}
