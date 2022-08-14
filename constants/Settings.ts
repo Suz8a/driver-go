@@ -1,3 +1,5 @@
+import { SettingsStackParamList } from "../types";
+
 export type IconProps = {
   name: string;
   size: number;
@@ -8,14 +10,14 @@ export type IconProps = {
 
 export type Settings = {
   title: string;
-  route: string;
+  route: keyof SettingsStackParamList;
   iconProps: IconProps;
 };
 
 export const settings: Settings[] = [
   {
     title: "Name",
-    route: "EditProfileName",
+    route: "EditName",
     iconProps: {
       name: "account-circle",
       size: 30,

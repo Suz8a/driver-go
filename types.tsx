@@ -23,9 +23,9 @@ export type RootStackParamList = {
 
 export type SettingsStackParamList = {
   Settings: undefined;
-  Name: undefined;
-  GPSNumber: undefined;
-  Commands: undefined;
+  EditName: undefined;
+  EditGPSNumber: undefined;
+  EditCommands: undefined;
 };
 
 // Screen Props
