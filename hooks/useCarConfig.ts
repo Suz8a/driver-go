@@ -1,6 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
 import useAsyncStorage from "./useAsyncStorage";
-import Icon from "react-native-vector-icons/Fontisto";
 
 export type Command = {
   command: string;

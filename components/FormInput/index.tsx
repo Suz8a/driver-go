@@ -1,0 +1,80 @@
+import { TextInput, View, StyleSheet, Dimensions } from "react-native";
+import { Text } from "../Themed";
+
+export type FormInputProps = {
+  placeholder: string;
+  value: string;
+  onChangeText: (text: string) => void;
+  autoFocus?: boolean;
+};
+
+const windowWidth = Dimensions.get("window").width;
+
+export default function FormInput({
+  placeholder,
+  onChangeText,
+  value,
+  autoFocus,
+}: FormInputProps) {
+  return (
+    <View style={styles.container}>
+      <View style={styles.inputTitleContainer}>
+        <Text style={styles.inputTitle}>Name</Text>
+      </View>
+      <View style={styles.inputSection}>
+        <View style={styles.inputContainer}>
+          <TextInput
+            style={styles.input}
+            placeholder={placeholder}
+            value={value}
+            onChangeText={onChangeText}
+            autoFocus={autoFocus}
+          />
+        </View>
+      </View>
+    </View>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    paddingTop: 20,
+  },
+  inputTitleContainer: {
+    marginLeft: 10,
+  },
+  inputTitle: {
+    color: "#8C8D8B",
+    fontSize: 16,
+    fontWeight: "500",
+  },
+  inputSection: {
+    backgroundColor: "white",
+    marginVertical: 10,
+    borderRadius: 20,
+  },
+  inputContainer: {
+    display: "flex",
+    flexDirection: "row",
+    alignItems: "center",
+    marginVertical: 20,
+    marginHorizontal: 10,
+  },
+  title: {
+    fontSize: 20,
+    color: "#343539",
+    marginLeft: 10,
+  },
+  InputContainer: {
+    backgroundColor: "white",
+    marginHorizontal: 10,
+    borderRadius: 20,
+  },
+  input: {
+    borderBottomColor: "black",
+    borderBottomWidth: 1,
+    height: 40,
+    fontSize: 16,
+    width: windowWidth - 30,
+  },
+});

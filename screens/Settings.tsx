@@ -8,10 +8,17 @@ import {
 import { Text } from "../components/Themed";
 import { settings } from "../constants/Settings";
 import Icon from "react-native-vector-icons/MaterialCommunityIcons";
+import { SettingsStackParamList, SettingsStackScreenProps } from "../types";
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function Settings() {
+export default function Settings({
+  navigation,
+}: SettingsStackScreenProps<"Settings">) {
+  const onPress = (name: keyof SettingsStackParamList) => {
+    navigation.navigate(name);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View>
@@ -20,7 +27,7 @@ export default function Settings() {
         </View>
         <View style={styles.section}>
           {settings.map(({ iconProps, route, title }, index) => (
-            <TouchableNativeFeedback key={index}>
+            <TouchableNativeFeedback key={index} onPress={() => onPress(route)}>
               <View>
                 <View style={styles.settingOptionContainer}>
                   <Icon {...iconProps} />

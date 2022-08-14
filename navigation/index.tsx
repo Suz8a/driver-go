@@ -18,6 +18,7 @@ import {
 } from "../types";
 import LinkingConfiguration from "./LinkingConfiguration";
 import Icon from "react-native-vector-icons/Ionicons";
+import EditName from "../screens/Name";
 
 const settingsIcon = <Icon name="settings-sharp" size={25} color="white" />;
 const arrowLeftIcon = <Icon name="ios-arrow-back" size={25} color="white" />;
@@ -96,9 +97,9 @@ function SettingsStackNavigator() {
           ),
         })}
       />
-      <SettingsStack.Screen name="Name" component={Home} />
-      <SettingsStack.Screen name="GPSNumber" component={Home} />
-      <SettingsStack.Screen name="Commands" component={Home} />
+      <SettingsStack.Screen name="EditName" component={EditName} />
+      <SettingsStack.Screen name="EditGPSNumber" component={Home} />
+      <SettingsStack.Screen name="EditCommands" component={Home} />
     </SettingsStack.Navigator>
   );
 }
