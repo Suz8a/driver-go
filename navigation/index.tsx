@@ -19,7 +19,7 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import Icon from "react-native-vector-icons/Ionicons";
 
-const settingsIcon = <Icon name="settings-sharp" size={30} color="gray" />;
+const settingsIcon = <Icon name="settings-sharp" size={25} color="white" />;
 const arrowLeftIcon = <Icon name="ios-arrow-back" size={25} color="white" />;
 
 export default function Navigation({

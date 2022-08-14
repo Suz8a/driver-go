@@ -2,7 +2,7 @@ import {
   Dimensions,
   ScrollView,
   StyleSheet,
-  TouchableOpacity,
+  TouchableNativeFeedback,
   View,
 } from "react-native";
 import { Text } from "../components/Themed";
@@ -20,15 +20,17 @@ export default function Settings() {
         </View>
         <View style={styles.section}>
           {settings.map(({ iconProps, route, title }, index) => (
-            <TouchableOpacity key={index}>
-              <View style={styles.settingOptionContainer}>
-                <Icon {...iconProps} />
-                <Text style={styles.title}>{title}</Text>
+            <TouchableNativeFeedback key={index}>
+              <View>
+                <View style={styles.settingOptionContainer}>
+                  <Icon {...iconProps} />
+                  <Text style={styles.title}>{title}</Text>
+                </View>
+                {index !== settings.length - 1 && (
+                  <View style={styles.separator} />
+                )}
               </View>
-              {index !== settings.length - 1 && (
-                <View style={styles.separator} />
-              )}
-            </TouchableOpacity>
+            </TouchableNativeFeedback>
           ))}
         </View>
       </View>
