@@ -1,7 +1,7 @@
 import { StyleSheet, View } from "react-native";
-import RoundedButton from "../components/RoundedButton";
+import { RoundedButton } from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
-import useCarStatus from "../hooks/useCarStatus";
+import { useCarStatus } from "../hooks/useCarStatus";
 
 export function Home() {
   const {

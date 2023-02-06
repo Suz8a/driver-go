@@ -6,10 +6,7 @@ export type RoundedButtonProps = {
   children: ReactNode;
 };
 
-export default function RoundedButton({
-  onPress,
-  children,
-}: RoundedButtonProps) {
+export function RoundedButton({ onPress, children }: RoundedButtonProps) {
   return (
     <TouchableOpacity style={styles.button} onPress={onPress}>
       {children}
@@ -34,12 +31,6 @@ const styles = StyleSheet.create({
     },
     shadowOpacity: 0.3,
     shadowRadius: 4.65,
-
     elevation: 8,
-  },
-  text: {
-    color: "white",
-    textAlign: "center",
-    fontSize: 25,
   },
 });

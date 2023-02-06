@@ -10,7 +10,7 @@ export type FormInputProps = {
 
 const windowWidth = Dimensions.get("window").width;
 
-export default function FormInput({
+export function FormInput({
   placeholder,
   onChangeText,
   value,
@@ -19,13 +19,12 @@ export default function FormInput({
   return (
     <View style={styles.container}>
       <View style={styles.inputTitleContainer}>
-        <Text style={styles.inputTitle}>Name</Text>
+        <Text style={styles.inputTitle}>{placeholder}</Text>
       </View>
       <View style={styles.inputSection}>
         <View style={styles.inputContainer}>
           <TextInput
             style={styles.input}
-            placeholder={placeholder}
             value={value}
             onChangeText={onChangeText}
             autoFocus={autoFocus}
@@ -57,6 +56,7 @@ const styles = StyleSheet.create({
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
+    justifyContent: "center",
     marginVertical: 20,
     marginHorizontal: 10,
   },
@@ -75,6 +75,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     height: 40,
     fontSize: 16,
-    width: windowWidth - 30,
+    width: windowWidth - 40,
   },
 });

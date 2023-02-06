@@ -12,7 +12,7 @@ export type CarStatus = {
   alarm: CommandStatus;
 };
 
-export default function useCarStatus() {
+export function useCarStatus() {
   const [storedCarStatus, setStoredCarStatus] = useAsyncStorage(
     "carStatus",
     ""

@@ -12,9 +12,7 @@ import { SettingsStackParamList, SettingsStackScreenProps } from "../types";
 
 const windowWidth = Dimensions.get("window").width;
 
-export  function Settings({
-  navigation,
-}: SettingsStackScreenProps<"Settings">) {
+export function Settings({ navigation }: SettingsStackScreenProps<"Settings">) {
   const onPress = (name: keyof SettingsStackParamList) => {
     navigation.navigate(name);
   };
