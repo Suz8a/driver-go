@@ -3,21 +3,21 @@ import { Alert, StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 
-export function EditName() {
+export function EditGPSNumber() {
   const { onChangeText, value } = useFormInput();
-  const [profileName, setProfileName] = useAsyncStorage("profileName", "");
+  const [gpsNumber, setGpsNumber] = useAsyncStorage("gpsNumber", "");
   const [editEnabled, setEditEnabled] = useState(false);
 
   const onSave = () => {
-    Alert.alert("Confirm", "Change profile name?", [
+    Alert.alert("Confirm", "Change GPS number?", [
       {
         text: "Cancel",
       },
       {
         text: "OK",
         onPress: () => {
-          if (value !== profileName) setProfileName(value);
-          ToastAndroid.show("Profile name updated", ToastAndroid.SHORT);
+          if (value !== gpsNumber) setGpsNumber(value);
+          ToastAndroid.show("GPS number updated", ToastAndroid.SHORT);
         },
       },
     ]);
@@ -28,16 +28,17 @@ export function EditName() {
   };
 
   useEffect(() => {
-    if (profileName) {
-      onChangeText(profileName);
+    if (gpsNumber) {
+      onChangeText(gpsNumber);
     }
-  }, [profileName]);
+  }, [gpsNumber]);
 
   return (
     <View style={styles.container}>
       <FormInput
+        secureTextEntry={!editEnabled}
         editable={editEnabled}
-        placeholder="Profile name"
+        placeholder="GPS number"
         onChangeText={onChangeText}
         value={value}
       />

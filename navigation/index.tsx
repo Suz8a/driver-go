@@ -7,9 +7,9 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import * as React from "react";
 import { ColorSchemeName, Pressable, View } from "react-native";
 
-import {NotFoundScreen} from "../screens/NotFoundScreen";
-import {Home} from "../screens/Home";
-import {Settings} from "../screens/Settings";
+import { NotFoundScreen } from "../screens/NotFoundScreen";
+import { Home } from "../screens/Home";
+import { Settings } from "../screens/Settings";
 import {
   RootStackParamList,
   RootStackScreenProps,
@@ -19,6 +19,8 @@ import {
 import LinkingConfiguration from "./LinkingConfiguration";
 import Icon from "react-native-vector-icons/Ionicons";
 import { EditName } from "../screens/EditName";
+import { EditGPSNumber } from "../screens/EditGPSNumber";
+import { EditCommands } from "../screens/EditCommands";
 
 const settingsIcon = <Icon name="settings-sharp" size={25} color="white" />;
 const arrowLeftIcon = <Icon name="ios-arrow-back" size={25} color="white" />;
@@ -42,7 +44,7 @@ const RootStack = createNativeStackNavigator<RootStackParamList>();
 
 function RootNavigator() {
   return (
-    <RootStack.Navigator screenOptions={{animation:'fade'}} >
+    <RootStack.Navigator screenOptions={{ animation: "fade" }}>
       <RootStack.Screen
         name="Home"
         component={Home}
@@ -98,8 +100,8 @@ function SettingsStackNavigator() {
         })}
       />
       <SettingsStack.Screen name="EditName" component={EditName} />
-      <SettingsStack.Screen name="EditGPSNumber" component={Home} />
-      <SettingsStack.Screen name="EditCommands" component={Home} />
+      <SettingsStack.Screen name="EditGPSNumber" component={EditGPSNumber} />
+      <SettingsStack.Screen name="EditCommands" component={EditCommands} />
     </SettingsStack.Navigator>
   );
 }
