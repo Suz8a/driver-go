@@ -3,7 +3,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 type UseAsyncStorageResult = [any, (value: any) => Promise<void>];
 
-export default function useAsyncStorage(
+export function useAsyncStorage(
   key: string,
   initialValue: any
 ): UseAsyncStorageResult {
