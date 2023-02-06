@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, ToastAndroid, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  ToastAndroid,
+  View,
+} from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 
@@ -36,12 +42,14 @@ export function EditName() {
 
   return (
     <View style={styles.container}>
-      <FormInput
-        editable={editEnabled}
-        placeholder="Profile name"
-        onChangeText={onChangeText}
-        value={value}
-      />
+      <ScrollView>
+        <FormInput
+          editable={editEnabled}
+          placeholder="Profile name"
+          onChangeText={onChangeText}
+          value={value}
+        />
+      </ScrollView>
 
       {moveToBottom(
         <View style={styles.buttonsContainer}>

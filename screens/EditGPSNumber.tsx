@@ -1,5 +1,11 @@
 import { useEffect, useState } from "react";
-import { Alert, StyleSheet, ToastAndroid, View } from "react-native";
+import {
+  Alert,
+  ScrollView,
+  StyleSheet,
+  ToastAndroid,
+  View,
+} from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 
@@ -36,13 +42,15 @@ export function EditGPSNumber() {
 
   return (
     <View style={styles.container}>
-      <FormInput
-        secureTextEntry={!editEnabled}
-        editable={editEnabled}
-        placeholder="GPS number"
-        onChangeText={onChangeText}
-        value={value}
-      />
+      <ScrollView>
+        <FormInput
+          secureTextEntry={!editEnabled}
+          editable={editEnabled}
+          placeholder="GPS number"
+          onChangeText={onChangeText}
+          value={value}
+        />
+      </ScrollView>
 
       {moveToBottom(
         <View style={styles.buttonsContainer}>
