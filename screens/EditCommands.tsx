@@ -26,6 +26,7 @@ export function EditCommands() {
         text: "OK",
         onPress: () => {
           updateCommands();
+          setEditEnabled(false);
           ToastAndroid.show("Commands updated", ToastAndroid.SHORT);
         },
       },
@@ -47,10 +48,10 @@ export function EditCommands() {
 
   useEffect(() => {
     if (commands) {
-      startEngineInput.onChangeText(commands.startEngine);
-      stopEngineInput.onChangeText(commands.stopEngine);
-      alarmOnInput.onChangeText(commands.alarmOn);
-      alarmOffInput.onChangeText(commands.alarmOff);
+      startEngineInput.onChangeText(commands.startEngine.trim());
+      stopEngineInput.onChangeText(commands.stopEngine.trim());
+      alarmOnInput.onChangeText(commands.alarmOn.trim());
+      alarmOffInput.onChangeText(commands.alarmOff.trim());
     }
   }, [commands]);
 

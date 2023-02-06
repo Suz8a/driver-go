@@ -16,7 +16,8 @@ export function EditGPSNumber() {
       {
         text: "OK",
         onPress: () => {
-          if (value !== gpsNumber) setGpsNumber(value);
+          if (value !== gpsNumber) setGpsNumber(value.trim());
+          setEditEnabled(false);
           ToastAndroid.show("GPS number updated", ToastAndroid.SHORT);
         },
       },

@@ -16,7 +16,8 @@ export function EditName() {
       {
         text: "OK",
         onPress: () => {
-          if (value !== profileName) setProfileName(value);
+          if (value !== profileName) setProfileName(value.trim());
+          setEditEnabled(false);
           ToastAndroid.show("Profile name updated", ToastAndroid.SHORT);
         },
       },
