@@ -53,11 +53,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
-  // inputSection: {
-  //   backgroundColor: "white",
-  //   marginVertical: 10,
-  //   borderRadius: 20,
-  // },
   inputContainer: {
     marginVertical: 10,
     marginHorizontal: 10,
