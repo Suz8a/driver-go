@@ -12,6 +12,7 @@ export type CarStatus = {
   alarm: CommandStatus;
 };
 
+// TODO: add no data error management
 export function useCarStatus() {
   const [storedCarStatus, setStoredCarStatus] = useAsyncStorage(
     "carStatus",
@@ -36,6 +37,7 @@ export function useCarStatus() {
     },
   });
 
+  // TODO: send on/off engine SMS based on localStorage data
   const switchEngine = useCallback(() => {
     const engineSwitchedIsActive = !carStatus.engine.active;
     const newStatusData = {
@@ -53,6 +55,7 @@ export function useCarStatus() {
     setStoredCarStatus(newStatusData);
   }, [setStoredCarStatus, carStatus]);
 
+  // TODO: send on/off alarm SMS based on localStorage data
   const switchAlarm = useCallback(() => {
     const alarmSwitchedIsActive = !carStatus.alarm.active;
     const newStatusData = {
