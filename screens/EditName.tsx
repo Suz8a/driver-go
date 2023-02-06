@@ -5,4 +5,3 @@ export function EditName () {
     <View>'EditName'</View>
   )
 }
-
