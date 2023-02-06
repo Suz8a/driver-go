@@ -28,16 +28,14 @@ export function FormInput({
       <View style={styles.inputTitleContainer}>
         <Text style={styles.inputTitle}>{placeholder}</Text>
       </View>
-      <View style={styles.inputSection}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            style={styles.input}
-            value={value}
-            onChangeText={onChangeText}
-            autoFocus={autoFocus}
-            {...props}
-          />
-        </View>
+      <View style={styles.inputContainer}>
+        <TextInput
+          style={styles.input}
+          value={value}
+          onChangeText={onChangeText}
+          autoFocus={autoFocus}
+          {...props}
+        />
       </View>
     </View>
   );
@@ -55,18 +53,15 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: "500",
   },
-  inputSection: {
-    backgroundColor: "white",
-    marginVertical: 10,
-    borderRadius: 20,
-  },
+  // inputSection: {
+  //   backgroundColor: "white",
+  //   marginVertical: 10,
+  //   borderRadius: 20,
+  // },
   inputContainer: {
-    display: "flex",
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "center",
-    marginVertical: 20,
+    marginVertical: 10,
     marginHorizontal: 10,
+    borderRadius: 20,
   },
   title: {
     fontSize: 20,
@@ -74,15 +69,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   InputContainer: {
-    backgroundColor: "white",
     marginHorizontal: 10,
     borderRadius: 20,
   },
   input: {
-    borderBottomColor: "black",
-    borderBottomWidth: 1,
+    flex: 1,
+    borderWidth: 1,
+    borderColor: "black",
+    borderRadius: 20,
+    padding: 10,
     height: 40,
     fontSize: 16,
-    width: windowWidth - 40,
   },
 });
