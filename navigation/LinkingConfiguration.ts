@@ -17,9 +17,9 @@ const linking: LinkingOptions<RootStackParamList> = {
       SettingsStackNavigator: {
         screens: {
           Settings: "settings",
-          Name: "name",
-          GPSNumber: "gpsNumber",
-          Commands: "commands",
+          EditName: "name",
+          EditGPSNumber: "gpsNumber",
+          EditCommands: "commands",
         },
       },
       NotFound: "*",

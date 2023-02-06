@@ -2,9 +2,8 @@ import { StyleSheet, View } from "react-native";
 import RoundedButton from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
 import useCarStatus from "../hooks/useCarStatus";
-import { request, PERMISSIONS } from "react-native-permissions";
 
-export default function Home() {
+export function Home() {
   const {
     carStatus: {
       alarm: { iconProps: alarmIconProps },
