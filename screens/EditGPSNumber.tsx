@@ -8,30 +8,28 @@ import {
 } from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
+import { useAuth } from "../hooks/useAuth";
 
 export function EditGPSNumber() {
   const { onChangeText, value } = useFormInput();
+  const { askForBiometrics } = useAuth();
   const [gpsNumber, setGpsNumber] = useAsyncStorage("gpsNumber", "");
   const [editEnabled, setEditEnabled] = useState(false);
 
   const onSave = () => {
-    Alert.alert("Confirm", "Change GPS number?", [
-      {
-        text: "Cancel",
-      },
-      {
-        text: "OK",
-        onPress: () => {
-          if (value !== gpsNumber) setGpsNumber(value.trim());
-          setEditEnabled(false);
-          ToastAndroid.show("GPS number updated", ToastAndroid.SHORT);
-        },
-      },
-    ]);
+    askForBiometrics(() => {
+      if (value !== gpsNumber) setGpsNumber(value.trim());
+      setEditEnabled(false);
+      ToastAndroid.show("GPS actualizado", ToastAndroid.LONG);
+    });
   };
 
   const onCancel = () => {
     setEditEnabled(false);
+  };
+
+  const onEdit = () => {
+    askForBiometrics(() => setEditEnabled(true));
   };
 
   useEffect(() => {
@@ -46,7 +44,7 @@ export function EditGPSNumber() {
         <FormInput
           secureTextEntry={!editEnabled}
           editable={editEnabled}
-          placeholder="GPS number"
+          placeholder="GPS"
           onChangeText={onChangeText}
           value={value}
         />
@@ -55,14 +53,14 @@ export function EditGPSNumber() {
       {moveToBottom(
         <View style={styles.buttonsContainer}>
           {!editEnabled ? (
-            <Button onPress={() => setEditEnabled(true)}>Edit</Button>
+            <Button onPress={onEdit}>Editar</Button>
           ) : (
             <>
               <Button variant="outlined" onPress={onCancel}>
-                Cancel
+                Cancelar
               </Button>
               <Button style={{ marginLeft: 20 }} onPress={onSave}>
-                Save
+                Guardar
               </Button>
             </>
           )}

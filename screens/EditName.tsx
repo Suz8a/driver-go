@@ -15,19 +15,9 @@ export function EditName() {
   const [editEnabled, setEditEnabled] = useState(false);
 
   const onSave = () => {
-    Alert.alert("Confirm", "Change profile name?", [
-      {
-        text: "Cancel",
-      },
-      {
-        text: "OK",
-        onPress: () => {
-          if (value !== profileName) setProfileName(value.trim());
-          setEditEnabled(false);
-          ToastAndroid.show("Profile name updated", ToastAndroid.SHORT);
-        },
-      },
-    ]);
+    if (value !== profileName) setProfileName(value.trim());
+    setEditEnabled(false);
+    ToastAndroid.show("Nombre de perfil actualizado", ToastAndroid.SHORT);
   };
 
   const onCancel = () => {
@@ -45,7 +35,7 @@ export function EditName() {
       <ScrollView>
         <FormInput
           editable={editEnabled}
-          placeholder="Profile name"
+          placeholder="Nombre de perfil"
           onChangeText={onChangeText}
           value={value}
         />
@@ -54,14 +44,14 @@ export function EditName() {
       {moveToBottom(
         <View style={styles.buttonsContainer}>
           {!editEnabled ? (
-            <Button onPress={() => setEditEnabled(true)}>Edit</Button>
+            <Button onPress={() => setEditEnabled(true)}>Editar</Button>
           ) : (
             <>
               <Button variant="outlined" onPress={onCancel}>
-                Cancel
+                Cancelar
               </Button>
               <Button style={{ marginLeft: 20 }} onPress={onSave}>
-                Save
+                Guardar
               </Button>
             </>
           )}

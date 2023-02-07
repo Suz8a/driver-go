@@ -21,7 +21,7 @@ export function Settings({ navigation }: SettingsStackScreenProps<"Settings">) {
     <ScrollView style={styles.container}>
       <View>
         <View style={styles.sectionTitleContainer}>
-          <Text style={styles.sectionTitle}>Profile info</Text>
+          <Text style={styles.sectionTitle}>Perfil</Text>
         </View>
         <View style={styles.section}>
           {settings.map(({ iconProps, route, title }, index) => (

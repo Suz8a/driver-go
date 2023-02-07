@@ -8,29 +8,27 @@ import {
 } from "react-native";
 import { Button, FormInput, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
+import { useAuth } from "../hooks/useAuth";
 
 export function EditCommands() {
   const startEngineInput = useFormInput();
   const stopEngineInput = useFormInput();
   const alarmOnInput = useFormInput();
   const alarmOffInput = useFormInput();
+  const { askForBiometrics } = useAuth();
   const [commands, setCommands] = useAsyncStorage("commands", "");
   const [editEnabled, setEditEnabled] = useState(false);
 
   const onSave = () => {
-    Alert.alert("Confirm", "Change commands?", [
-      {
-        text: "Cancel",
-      },
-      {
-        text: "OK",
-        onPress: () => {
-          updateCommands();
-          setEditEnabled(false);
-          ToastAndroid.show("Commands updated", ToastAndroid.SHORT);
-        },
-      },
-    ]);
+    askForBiometrics(() => {
+      updateCommands();
+      setEditEnabled(false);
+      ToastAndroid.show("Comandos actualizados", ToastAndroid.LONG);
+    });
+  };
+
+  const onEdit = () => {
+    askForBiometrics(() => setEditEnabled(true));
   };
 
   const onCancel = () => {
@@ -90,14 +88,14 @@ export function EditCommands() {
 
       <View style={styles.buttonsContainer}>
         {!editEnabled ? (
-          <Button onPress={() => setEditEnabled(true)}>Edit</Button>
+          <Button onPress={onEdit}>Editar</Button>
         ) : (
           <>
             <Button variant="outlined" onPress={onCancel}>
-              Cancel
+              Cancelar
             </Button>
             <Button style={{ marginLeft: 20 }} onPress={onSave}>
-              Save
+              Guardar
             </Button>
           </>
         )}

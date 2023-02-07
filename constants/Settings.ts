@@ -16,7 +16,7 @@ export type Settings = {
 
 export const settings: Settings[] = [
   {
-    title: "Name",
+    title: "Nombre",
     route: "EditName",
     iconProps: {
       name: "account-circle",
@@ -25,7 +25,7 @@ export const settings: Settings[] = [
     },
   },
   {
-    title: "GPS number",
+    title: "GPS",
     route: "EditGPSNumber",
     iconProps: {
       name: "cellphone",
@@ -34,7 +34,7 @@ export const settings: Settings[] = [
     },
   },
   {
-    title: "Commands",
+    title: "Comandos",
     route: "EditCommands",
     iconProps: {
       name: "shield-key",
