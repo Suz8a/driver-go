@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Alert, ToastAndroid } from "react-native";
 import { useAsyncStorage } from "./useAsyncStorage";
 import * as LocalAuthentication from "expo-local-authentication";

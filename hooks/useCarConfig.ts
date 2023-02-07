@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useState } from "react";
-import useAsyncStorage from "./useAsyncStorage";
+import {useAsyncStorage} from "./useAsyncStorage";
 
 export type Command = {
   command: string;

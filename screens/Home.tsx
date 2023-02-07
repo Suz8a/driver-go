@@ -3,7 +3,7 @@ import { RoundedButton } from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
 import { useCarStatus } from "../hooks/useCarStatus";
 import * as LocalAuthentication from "expo-local-authentication";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 import { useAuth } from "../hooks/useAuth";
 

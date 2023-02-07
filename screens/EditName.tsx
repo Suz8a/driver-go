@@ -1,11 +1,5 @@
 import { useEffect, useState } from "react";
-import {
-  Alert,
-  ScrollView,
-  StyleSheet,
-  ToastAndroid,
-  View,
-} from "react-native";
+import { ScrollView, StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 
