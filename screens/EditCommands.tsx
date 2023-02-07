@@ -23,7 +23,7 @@ export function EditCommands() {
     askForBiometrics(() => {
       updateCommands();
       setEditEnabled(false);
-      ToastAndroid.show("Comandos actualizados", ToastAndroid.LONG);
+      ToastAndroid.show("Comandos actualizados", ToastAndroid.SHORT);
     });
   };
 

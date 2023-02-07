@@ -12,10 +12,6 @@ export const useAuth = ()=>{
       const askForPassword = (action: () => void) => {
         Alert.prompt("Ingrese su contraseña", undefined, (password) => {
           if (password === "yourpassword") {
-            ToastAndroid.show(
-              "Autenticación con contraseña exitosa",
-              ToastAndroid.SHORT
-            );
             action();
           } else {
             ToastAndroid.show(
@@ -38,7 +34,6 @@ export const useAuth = ()=>{
           });
     
           if (result.success) {
-            ToastAndroid.show("Autenticación exitosa", ToastAndroid.SHORT);
             action();
           }
         } catch (error) {

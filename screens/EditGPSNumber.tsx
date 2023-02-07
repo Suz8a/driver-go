@@ -20,7 +20,7 @@ export function EditGPSNumber() {
     askForBiometrics(() => {
       if (value !== gpsNumber) setGpsNumber(value.trim());
       setEditEnabled(false);
-      ToastAndroid.show("GPS actualizado", ToastAndroid.LONG);
+      ToastAndroid.show("GPS actualizado", ToastAndroid.SHORT);
     });
   };
 
