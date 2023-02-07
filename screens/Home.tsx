@@ -1,4 +1,4 @@
-import { Alert, StyleSheet, ToastAndroid, View } from "react-native";
+import { StyleSheet, View, Text } from "react-native";
 import { RoundedButton } from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
 import { useCarStatus } from "../hooks/useCarStatus";
@@ -12,6 +12,7 @@ export function Home() {
     "biometricsSupported",
     ""
   );
+  const [profileName, _] = useAsyncStorage("profileName", "");
   const { askForBiometrics } = useAuth();
   const {
     carStatus: {
@@ -30,6 +31,9 @@ export function Home() {
 
   return (
     <View style={styles.container}>
+      <View style={styles.profile}>
+        <Text style={styles.profileText}>{profileName}</Text>
+      </View>
       <RoundedButton onPress={() => askForBiometrics(switchEngine)}>
         <Icon {...engineIconProps} />
       </RoundedButton>
@@ -55,5 +59,13 @@ const styles = StyleSheet.create({
     marginVertical: 30,
     height: 1,
     width: "80%",
+  },
+  profile: {
+    position: "absolute",
+    top: 40,
+  },
+  profileText: {
+    fontSize: 25,
+    fontWeight: "bold",
   },
 });
