@@ -25,23 +25,25 @@ export default function useCarConfig() {
     "carConfig",
     ""
   );
+  const [commands] = useAsyncStorage("commands", "");
+  const [gpsNumber] = useAsyncStorage("gpsNumber", "");
   const [carConfig, setCarConfig] = useState<CarConfig>({
-    gpsNumber: "-",
+    gpsNumber: "",
     commands: {
       start: {
-        command: "resume123456",
+        command: "",
         successMessage: "Engine Started",
       },
       stop: {
-        command: "stop123456",
+        command: "",
         successMessage: "Engine Stopped",
       },
       alarmOn: {
-        command: "arm123456",
+        command: "",
         successMessage: "Alarm On",
       },
       alarmOff: {
-        command: "disarm123456",
+        command: "",
         successMessage: "Alarm Off",
       },
     },
@@ -75,6 +77,33 @@ export default function useCarConfig() {
   useEffect(() => {
     if (storedCarConfig) setCarConfig(storedCarConfig);
   }, [storedCarConfig]);
+
+  useEffect(() => {
+    if (commands && gpsNumber){
+      const currentConfig = {
+        gpsNumber: gpsNumber,
+        commands: {
+          start: {
+            command: commands.startEngine,
+            successMessage: "Engine Started",
+          },
+          stop: {
+            command: commands.stopEngine,
+            successMessage: "Engine Stopped",
+          },
+          alarmOn: {
+            command: commands.alarmOn,
+            successMessage: "Alarm On",
+          },
+          alarmOff: {
+            command: commands.alarmOff,
+            successMessage: "Alarm Off",
+          },
+        },
+      }
+      setCarConfig(currentConfig)
+    }
+  }, [commands,gpsNumber]);
 
   return {
     carConfig,
