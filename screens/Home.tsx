@@ -6,13 +6,13 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { useEffect } from "react";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 import { useAuth } from "../hooks/useAuth";
-// @ts-ignore
-import * as SendSMS from "react-native-sms-x";
 
 export function Home() {
+  PermissionsAndroid.request("android.permission.SEND_SMS");
+
   const [biometricsSupported, setBiometricsSupported] = useAsyncStorage(
     "biometricsSupported",
-    ""
+    false
   );
   const [profileName] = useAsyncStorage("profileName", "");
   const { askForBiometrics } = useAuth();
@@ -36,7 +36,7 @@ export function Home() {
       <View style={styles.profile}>
         <Text style={styles.profileText}>{profileName}</Text>
       </View>
-      <RoundedButton onPress={() => switchEngine()}>
+      <RoundedButton onPress={() => askForBiometrics(switchEngine)}>
         <Icon {...engineIconProps} />
       </RoundedButton>
       <RoundedButton onPress={() => askForBiometrics(switchAlarm)}>
