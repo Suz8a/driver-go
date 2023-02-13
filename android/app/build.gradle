@@ -334,6 +334,10 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+    implementation project(':react-native-sms-x')
+    // implementation 'androidx.work:work-runtime-ktx:2.7.1'
+    // implementation 'androidx.work:work-runtime:2.7.1'
+    implementation 'androidx.work:work-runtime:2.7.0-alpha05'
 }
 
 if (isNewArchitectureEnabled()) {
@@ -345,6 +349,7 @@ if (isNewArchitectureEnabled()) {
             substitute(module("com.facebook.react:react-native"))
                     .using(project(":ReactAndroid")).because("On New Architecture we're building React Native from source")
         }
+        resolutionStrategy.force 'com.android.support:support-annotations:27.1.1'
     }
 }
 
@@ -365,3 +370,4 @@ def isNewArchitectureEnabled() {
     // - Set an environment variable `ORG_GRADLE_PROJECT_newArchEnabled=true`
     return project.hasProperty("newArchEnabled") && project.newArchEnabled == "true"
 }
+

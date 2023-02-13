@@ -3,6 +3,7 @@ import { ScrollView, StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 import { useAuth } from "../hooks/useAuth";
+import { showNotification } from "../utils";
 
 export function EditGPSNumber() {
   const { onChangeText, value } = useFormInput();
@@ -14,7 +15,7 @@ export function EditGPSNumber() {
     askForBiometrics(() => {
       if (value !== gpsNumber) setGpsNumber(value.trim());
       setEditEnabled(false);
-      ToastAndroid.show("GPS actualizado", ToastAndroid.SHORT);
+      showNotification("GPS actualizado");
     });
   };
 
@@ -36,6 +37,9 @@ export function EditGPSNumber() {
     <View style={styles.container}>
       <ScrollView>
         <FormInput
+          maxLength={10}
+          description="* Número de 10 dígitos"
+          keyboardType="number-pad"
           secureTextEntry={!editEnabled}
           editable={editEnabled}
           placeholder="GPS"

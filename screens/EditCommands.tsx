@@ -3,6 +3,14 @@ import { ScrollView, StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, FormInput, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 import { useAuth } from "../hooks/useAuth";
+import { showNotification } from "../utils";
+
+export type Commands = {
+  startEngine: string;
+  stopEngine: string;
+  alarmOn: string;
+  alarmOff: string;
+};
 
 export function EditCommands() {
   const startEngineInput = useFormInput();
@@ -17,7 +25,7 @@ export function EditCommands() {
     askForBiometrics(() => {
       updateCommands();
       setEditEnabled(false);
-      ToastAndroid.show("Comandos actualizados", ToastAndroid.SHORT);
+      showNotification("Comandos actualizados");
     });
   };
 

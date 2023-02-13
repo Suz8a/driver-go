@@ -1,10 +1,4 @@
-import {
-  TextInput,
-  View,
-  StyleSheet,
-  Dimensions,
-  TextInputProps,
-} from "react-native";
+import { TextInput, View, StyleSheet, TextInputProps } from "react-native";
 import { Text } from "../Themed";
 
 export type FormInputProps = {
@@ -12,15 +6,15 @@ export type FormInputProps = {
   value: string;
   onChangeText: (text: string) => void;
   autoFocus?: boolean;
+  description?: string;
 } & TextInputProps;
-
-const windowWidth = Dimensions.get("window").width;
 
 export function FormInput({
   placeholder,
   onChangeText,
   value,
   autoFocus,
+  description,
   ...props
 }: FormInputProps) {
   return (
@@ -36,6 +30,9 @@ export function FormInput({
           autoFocus={autoFocus}
           {...props}
         />
+      </View>
+      <View style={{ marginHorizontal: 10 }}>
+        <Text style={{ color: "#4b4b4b" }}>{description}</Text>
       </View>
     </View>
   );
@@ -54,8 +51,7 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   inputContainer: {
-    marginVertical: 10,
-    marginHorizontal: 10,
+    margin: 10,
     borderRadius: 20,
   },
   title: {

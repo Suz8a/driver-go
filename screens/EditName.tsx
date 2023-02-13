@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { ScrollView, StyleSheet, ToastAndroid, View } from "react-native";
 import { Button, FormInput, moveToBottom, useFormInput } from "../components";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
+import { showNotification } from "../utils";
 
 export function EditName() {
   const { onChangeText, value } = useFormInput();
@@ -11,7 +12,7 @@ export function EditName() {
   const onSave = () => {
     if (value !== profileName) setProfileName(value.trim());
     setEditEnabled(false);
-    ToastAndroid.show("Nombre de perfil actualizado", ToastAndroid.SHORT);
+    showNotification("Nombre de perfil actualizado");
   };
 
   const onCancel = () => {

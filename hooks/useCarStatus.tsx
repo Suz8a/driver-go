@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 import { useAsyncStorage } from "./useAsyncStorage";
 import { IconProps } from "../constants/Settings";
+import { sendSMS } from "../utils";
+import { Commands } from "../screens/EditCommands";
 
 export type CommandStatus = {
   active: boolean;
@@ -12,11 +14,34 @@ export type CarStatus = {
   alarm: CommandStatus;
 };
 
+const commandDescription = {
+  engine: {
+    active: "Engine Started",
+    inactive: "Engine Stopped",
+  },
+  alarm: {
+    active: "Alarm On",
+    inactive: "Alarm Off",
+  },
+};
+
+function getSuccessMsg(type: "engine" | "alarm", active: boolean) {
+  return commandDescription[type][active ? "active" : "inactive"];
+}
+
 // TODO: add no data error management
 export function useCarStatus() {
   const [storedCarStatus, setStoredCarStatus] = useAsyncStorage(
     "carStatus",
     ""
+  );
+  const [gpsNumber] = useAsyncStorage("gpsNumber", "");
+  const [commands] = useAsyncStorage("commands", "");
+  const [currentGpsNumber, setCurrentGpsNumber] = useState<string | undefined>(
+    undefined
+  );
+  const [currentCommands, setCurrentCommands] = useState<Commands | undefined>(
+    undefined
   );
   const [carStatus, setCarStatus] = useState<CarStatus>({
     engine: {
@@ -40,7 +65,7 @@ export function useCarStatus() {
   // TODO: send on/off engine SMS based on localStorage data
   const switchEngine = useCallback(() => {
     const engineSwitchedIsActive = !carStatus.engine.active;
-    const newStatusData = {
+    const newStatusData: CarStatus = {
       ...carStatus,
       engine: {
         active: engineSwitchedIsActive,
@@ -52,13 +77,21 @@ export function useCarStatus() {
       },
     };
 
+    sendSMS(
+      engineSwitchedIsActive
+        ? currentCommands?.stopEngine
+        : currentCommands?.startEngine,
+      currentGpsNumber,
+      getSuccessMsg("engine", engineSwitchedIsActive)
+    );
+
     setStoredCarStatus(newStatusData);
   }, [setStoredCarStatus, carStatus]);
 
   // TODO: send on/off alarm SMS based on localStorage data
   const switchAlarm = useCallback(() => {
     const alarmSwitchedIsActive = !carStatus.alarm.active;
-    const newStatusData = {
+    const newStatusData: CarStatus = {
       ...carStatus,
       alarm: {
         active: alarmSwitchedIsActive,
@@ -70,14 +103,28 @@ export function useCarStatus() {
       },
     };
 
+    sendSMS(
+      alarmSwitchedIsActive
+        ? currentCommands?.alarmOff
+        : currentCommands?.alarmOn,
+      currentGpsNumber,
+      getSuccessMsg("alarm", alarmSwitchedIsActive)
+    );
+
     setStoredCarStatus(newStatusData);
   }, [setStoredCarStatus, carStatus]);
 
   useEffect(() => {
-    if (storedCarStatus) {
-      setCarStatus(storedCarStatus);
-    }
+    if (storedCarStatus) setCarStatus(storedCarStatus);
   }, [storedCarStatus]);
+
+  useEffect(() => {
+    setCurrentGpsNumber(gpsNumber);
+  }, [gpsNumber]);
+
+  useEffect(() => {
+    setCurrentCommands(commands);
+  }, [commands]);
 
   return {
     carStatus,

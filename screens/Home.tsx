@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from "react-native";
+import { StyleSheet, View, Text, PermissionsAndroid } from "react-native";
 import { RoundedButton } from "../components/RoundedButton";
 import Icon from "react-native-vector-icons/Fontisto";
 import { useCarStatus } from "../hooks/useCarStatus";
@@ -6,13 +6,15 @@ import * as LocalAuthentication from "expo-local-authentication";
 import { useEffect } from "react";
 import { useAsyncStorage } from "../hooks/useAsyncStorage";
 import { useAuth } from "../hooks/useAuth";
+// @ts-ignore
+import * as SendSMS from "react-native-sms-x";
 
 export function Home() {
   const [biometricsSupported, setBiometricsSupported] = useAsyncStorage(
     "biometricsSupported",
     ""
   );
-  const [profileName, _] = useAsyncStorage("profileName", "");
+  const [profileName] = useAsyncStorage("profileName", "");
   const { askForBiometrics } = useAuth();
   const {
     carStatus: {
@@ -34,7 +36,7 @@ export function Home() {
       <View style={styles.profile}>
         <Text style={styles.profileText}>{profileName}</Text>
       </View>
-      <RoundedButton onPress={() => askForBiometrics(switchEngine)}>
+      <RoundedButton onPress={() => switchEngine()}>
         <Icon {...engineIconProps} />
       </RoundedButton>
       <RoundedButton onPress={() => askForBiometrics(switchAlarm)}>
