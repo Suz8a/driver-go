@@ -1,4 +1,4 @@
-import { Alert, ToastAndroid } from "react-native";
+import { Alert } from "react-native";
 import { useAsyncStorage } from "./useAsyncStorage";
 import * as LocalAuthentication from "expo-local-authentication";
 import { showNotification } from "../utils";
